@@ -11,6 +11,24 @@ def cli():
     pass
 
 
+@cli.group()
+def mapping():
+    """ View or alter data types"""
+    pass
+
+
+@mapping.command()
+def show():
+    """ List the current mappings """
+    pass
+
+
+@mapping.command('set', help='Set mappings')
+def set_():
+    """ Set mappings """
+    pass
+
+
 @cli.command()
 def load():
     """ Show the schema"""
