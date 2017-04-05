@@ -17,6 +17,18 @@ def mapping():
     pass
 
 
+@cli.command()
+def init():
+    """ Configure PSQL DB """
+    name = str(raw_input("Database Name: "))
+    username = str(raw_input("Username: "))
+    passw = str(raw_input("Password: "))
+    host = str(raw_input("Host: "))
+    port = str(raw_input("Port: "))
+
+    psql = PSQL(name, username, passw, host, port)
+
+
 @mapping.command()
 def show():
     """ List the current mappings """
