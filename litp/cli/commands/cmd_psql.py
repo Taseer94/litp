@@ -81,8 +81,16 @@ def data(lite, psql):
               'dhcp6_fingerprint', 'user_agent', 'dhcp_vendor', 'combination']
 
     for table in tables:
-        print table
-        result = sql_db.execute_query("SELECT * FROM {0}".format(table))
-        values = utils.data(result)
-        query = "INSERT INTO {} VALUES {}".format(table, values)
-        psql_db.exec_query(query)
+        result = sql_db.execute_query("SELECT * FROM {}".format(table))
+        for row in result:
+            values = []
+            for i in range(0, len(row)):
+                if isinstance(row[i], unicode):
+                    values.insert(i, row[i].encode('ascii', 'ignore'))
+                elif row[i] is None:
+                    values.insert(i, 0)
+                else:
+                    values.insert(i, row[i])
+                values = tuple(values)
+                query = "INSERT INTO {} VALUES {}".format(table, values)
+                psql_db.exec_query(query)

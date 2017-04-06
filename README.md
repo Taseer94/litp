@@ -47,5 +47,13 @@ This would present how the datatypes in SQLite would be mapped onto that of PSQL
 Load the schema from SQLiteDB to PSQLDB.
 
 ```
-  litp psql load [-s|--lite] <sqlite_db> [-p|--psql] <psql_db>
+  litp psql load schema [-l|--lite] <sqlite_db> [-p|--psql] <psql_db>
+```
+
+#### Convert the data
+
+Load the data from SQLiteDB to PSQLDB.
+
+```
+  litp psql load data [-l|--lite] <sqlite_db> [-p|--psql] <psql_db>
 ```
