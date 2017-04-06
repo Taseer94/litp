@@ -82,6 +82,7 @@ def data(lite, psql):
 
     for table in tables:
         result = sql_db.execute_query("SELECT * FROM {}".format(table))
+        print "selected"
         for row in result:
             values = []
             for i in range(0, len(row)):
@@ -91,6 +92,6 @@ def data(lite, psql):
                     values.insert(i, 0)
                 else:
                     values.insert(i, row[i])
-                values = tuple(values)
-                query = "INSERT INTO {} VALUES {}".format(table, values)
-                psql_db.exec_query(query)
+            values = tuple(values)
+            query = "INSERT INTO {} VALUES {}".format(table, values)
+            psql_db.exec_query(query)
