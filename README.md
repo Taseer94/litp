@@ -42,4 +42,10 @@ This would present how the datatypes in SQLite would be mapped onto that of PSQL
 +------------+-----------+
 ```
 
-These mappings are placed in litp/base/mapping.yaml file. One can edit the file for further customizations.
+#### Convert the schema
+
+Load the schema from SQLiteDB to PSQLDB.
+
+```
+  litp psql load [-s|--lite] <sqlite_db> [-p|--psql] <psql_db>
+```
