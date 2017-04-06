@@ -1,0 +1,4 @@
+mappings:
+  - int(11): int
+  - datetime: timestamp
+  - tinyint(1): smallint

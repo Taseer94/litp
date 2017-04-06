@@ -1,5 +1,3 @@
-""" Psql commands """
-
 import click
 
 from litp.base.lite import SqLite3

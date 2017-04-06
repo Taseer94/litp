@@ -11,8 +11,6 @@ class PSQL(object):
                                    password=pasw, host=host, port=port)
 
         self.p_cursor = self.p_conn.cursor()
-        self.var_dict = {'int(11)': 'int', 'datetime': 'timestamp',
-                         'tinyint(1)': 'smallint'}
 
     def __del__(self):
         self.p_cursor.close()
