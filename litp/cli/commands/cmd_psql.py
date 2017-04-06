@@ -1,11 +1,13 @@
 """ Psql commands """
 
 import click
+from copy import deepcopy
 import getpass
 from prettytable import PrettyTable
 
-from litp.base.psql import PSQL
 from litp.base import utils
+from litp.base.psql import PSQL
+from litp.base.lite import SqLite3
 
 
 @click.group()
@@ -20,27 +22,13 @@ def mapping():
     pass
 
 
-@cli.command()
-def init():
-    """ Configure PSQL DB """
-    name = str(raw_input("Database Name: "))
-    username = str(raw_input("Username: "))
-    passw = getpass.getpass("Password: ")
-    host = str(raw_input("Host: "))
-    port = str(raw_input("Port: "))
-
-    psql = PSQL(name, username, passw, host, port)
-
-
 @mapping.command()
 def show():
     """ List the current mappings """
-    data = utils.load()
     table = PrettyTable(['SQLite', 'PSQL'])
     table.align = 'l'
-    for entry in data:
-        for key, value in entry.iteritems():
-            table.add_row([key, value])
+    for key, value in utils.var_dict.iteritems():
+        table.add_row([key, value])
     print table
 
 
@@ -50,8 +38,28 @@ def set_():
     pass
 
 
-@cli.command()
+@cli.group()
 def load():
-    """ Show the schema"""
+    """ Load schema or data """
     pass
-    
+
+
+@load.command()
+@click.option('-s', '--lite', help='SQLite DB')
+@click.option('-p', '--psql', help='PSQL DB')
+def schema(lite, psql):
+    """ Load the schema """
+    sql_db = SqLite3(lite)
+
+    passw = getpass.getpass('Password: ')
+    psql_db = PSQL(psql, passw)
+
+    lite_schema = sql_db.get_schema()
+
+    for row in lite_schema:
+        query = ""
+        query = deepcopy(row[4])
+        if query:
+            for key in utils.var_dict:
+                query = query.replace(key, utils.var_dict[key])
+            psql_db.exec_query(query)

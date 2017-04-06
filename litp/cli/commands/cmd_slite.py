@@ -14,4 +14,7 @@ def cli():
 def show(name):
     """ Show schema of database """
     sql_db = SqLite3(name)
-    sql_db.get_schema()
+    result = sql_db.get_schema()
+    for row in result:
+        if row[4] is not None:
+            print row[4]

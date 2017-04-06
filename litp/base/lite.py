@@ -20,12 +20,9 @@ class SqLite3(object):
         """ Execute Query """
         result = self.s_cursor.execute(query)
         self.s_conn.commit()
-
         return result
 
     def get_schema(self):
         """ Display schema of sqlite """
         result = self.execute_query('SELECT * FROM sqlite_master;')
-        for row in result:
-            if row[4] is not None:
-                print row[4]
+        return result
