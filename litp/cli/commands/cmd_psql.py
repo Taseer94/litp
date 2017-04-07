@@ -4,6 +4,7 @@ import click
 from copy import deepcopy
 import getpass
 from prettytable import PrettyTable
+import sqlite3 as sl
 
 from litp.base import utils
 from litp.base.psql import PSQL
@@ -68,7 +69,8 @@ def schema(lite, psql):
 @load.command()
 @click.option('-l', '--lite', help='SQLite DB')
 @click.option('-p', '--psql', help='PSQL DB')
-def data(lite, psql):
+@click.option('-t', '--table', help='Table to transfer')
+def data(lite, psql, table):
     """ Load data """
     sql_db = SqLite3(lite)
 
@@ -77,12 +79,11 @@ def data(lite, psql):
 
     #query = """SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"""
     #tables = psql_db.exec_query(query)
-    tables = ['device', 'mac_vendor', 'dhcp6_enterprise', 'dhcp_fingerprint',
-              'dhcp6_fingerprint', 'user_agent', 'dhcp_vendor', 'combination']
+    tables = [table]
 
     for table in tables:
+        print(table)
         result = sql_db.execute_query("SELECT * FROM {}".format(table))
-        print "selected"
         for row in result:
             values = []
             for i in range(0, len(row)):

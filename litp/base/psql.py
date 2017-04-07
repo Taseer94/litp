@@ -18,5 +18,10 @@ class PSQL(object):
 
     def exec_query(self, query):
         """ Execute the qurey """
-        self.p_cursor.execute(query)
-        self.p_conn.commit()
+        try:
+            self.p_cursor.execute(query)
+            self.p_conn.commit()
+        except psql.ProgrammingError:
+            pass
+        except psql.InternalError:
+            pass
