@@ -3,6 +3,12 @@
 import sqlite3 as sq
 from os import path
 
+from litp.base.logger import LitpLogger
+
+
+logger = LitpLogger('SQLite').get
+
+
 class SqLite3(object):
     """ SQLite object"""
 
@@ -12,6 +18,7 @@ class SqLite3(object):
         self.s_conn = sq.connect(self.db_path)
         self.s_conn.text_factory = str
         self.s_cursor = self.s_conn.cursor()
+        logger.info("Connected to {}".format(name))
 
     def __del__(self):
         self.s_cursor.close()
@@ -26,4 +33,5 @@ class SqLite3(object):
     def get_schema(self):
         """ Display schema of sqlite """
         result = self.execute_query('SELECT * FROM sqlite_master;')
+        logger.info("Loaded Schema")
         return result

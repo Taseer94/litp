@@ -9,6 +9,10 @@ import sqlite3 as sl
 from litp.base import utils
 from litp.base.psql import PSQL
 from litp.base.lite import SqLite3
+from litp.base.logger import LitpLogger
+
+
+logger = LitpLogger('psql_cmd').get
 
 
 @click.group()
@@ -80,9 +84,9 @@ def data(lite, psql, table):
     #query = """SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"""
     #tables = psql_db.exec_query(query)
     tables = [table]
+    logger.info("Initiating conversion")
 
     for table in tables:
-        print(table)
         result = sql_db.execute_query("SELECT * FROM {}".format(table))
         for row in result:
             values = []
@@ -96,3 +100,4 @@ def data(lite, psql, table):
             values = tuple(values)
             query = "INSERT INTO {} VALUES {}".format(table, values)
             psql_db.exec_query(query)
+    logger.info("Data loaded successfully")
