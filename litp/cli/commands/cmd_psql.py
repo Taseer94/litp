@@ -4,6 +4,7 @@ import click
 from copy import deepcopy
 import getpass
 from prettytable import PrettyTable
+import sqlite3 as sl
 
 from litp.base import utils
 from litp.base.psql import PSQL
@@ -81,8 +82,8 @@ def data(lite, psql):
               'dhcp6_fingerprint', 'user_agent', 'dhcp_vendor', 'combination']
 
     for table in tables:
+        print(table)
         result = sql_db.execute_query("SELECT * FROM {}".format(table))
-        print "selected"
         for row in result:
             values = []
             for i in range(0, len(row)):

@@ -10,6 +10,7 @@ class SqLite3(object):
         self.db_path = path.join(path.dirname(__file__), path.pardir,
                                  path.pardir, 'databases/', name)
         self.s_conn = sq.connect(self.db_path)
+        self.s_conn.text_factory = str
         self.s_cursor = self.s_conn.cursor()
 
     def __del__(self):
