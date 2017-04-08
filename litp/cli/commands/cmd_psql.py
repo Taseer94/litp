@@ -91,9 +91,7 @@ def data(lite, psql, table):
         for row in result:
             values = []
             for i in range(0, len(row)):
-                if isinstance(row[i], unicode):
-                    values.insert(i, row[i].encode('ascii', 'ignore'))
-                elif row[i] is None:
+                if row[i] is None:
                     values.insert(i, 0)
                 else:
                     values.insert(i, row[i])
