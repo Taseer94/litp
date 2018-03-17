@@ -1,6 +1,6 @@
 # LITP
 
-LITP is a python to load data from SQLite3 database to a PSQL database. The user configures the settings for both of the databases. Due to difference in the schema, such as that in data types etc, LITP provides the user to set the appropriate ones as per his/her choice. However this tool
+LITP is a python program to load data from SQLite3 database to a PSQL database. The user configures the settings for both of the databases. Due to difference in the schema, such as that in data types etc, LITP provides the user to set the appropriate ones as per his/her choice. However this tool
 may not work for all cases. Every DB is structured in its own way, it is almost impossible to cover all aspects.
 
 This tool works well for fingerbank database, https://fingerbank.org/
