@@ -1,4 +1,6 @@
-""" Setup File """
+"""
+Setup File
+"""
 
 from setuptools import setup
 
