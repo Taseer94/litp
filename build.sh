@@ -60,7 +60,7 @@ fi
 ###########################
 # K8s Tests
 ###########################
-if [[ TRAVIS_BRANCH =~ 'azure' ]]; then
+if [[ TRAVIS_BRANCH =~ 'master' ]]; then
   az aks get-credentials --resource-group kaos-2-stage-k8s --name kaos-2-stage-k8s
 elif [[ TRAVIS_BRANCH =~ 'aws' ]]; then
   aws eks update-kubeconfig --name kaos-2-stage-eks-cluster --region eu-central-1
