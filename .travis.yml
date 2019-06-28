@@ -1,0 +1,14 @@
+---
+
+language: python
+sudo: required
+
+jobs:
+  include:
+    #- stage: Backend tests
+    #  script: cd backend && make test-unit
+    #- stage: CLI tests
+    #  script: cd cli && make test-unit
+    - stage: Deploy Terraform
+      script: build.sh
+
