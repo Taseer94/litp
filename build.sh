@@ -40,18 +40,18 @@ echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
 ###########################
 # Terraform deployment
 ###########################
-if [[ TRAVIS_BRANCH =~ "azure" ]]; then
+if [[ ${TRA§VIS_BRANCH} =~ "azure" ]]; then
   cd infrastructure/azure/envs/stage
   terraform init -no-color
   terraform validate -no-color
   terraform plan -no-color
   # terraform apply -no-color -auto-approve
-elif [[ TRAVIS_BRANCH =~ "gpc" ]]; then
+elif [[ ${TRAVIS_BRANCH} =~ "gpc" ]]; then
   cd infrastructure/gcp/envs/stage
   terraform validate
   terraform plan -no-color
   # terraform apply -no-color -auto-approve
-elif [[ TRAVIS_BRANCH =~ "aws" ]]; then
+elif [[ ${TRAVIS_BRANCH} =~ "aws" ]]; then
   cd infrastructure/aws/envs/stage
   terraform validate
   terraform plan -no-color
@@ -61,9 +61,9 @@ fi
 ###########################
 # K8s Tests
 ###########################
-if [[ TRAVIS_BRANCH =~ "master" ]]; then
+if [[ ${TRAVIS_BRANCH} =~ "master" ]]; then
   az aks get-credentials --resource-group kaos-2-stage-k8s --name kaos-2-stage-k8s
-elif [[ TRAVIS_BRANCH =~ "aws" ]]; then
+elif [[ ${TRAVIS_BRANCH} =~ "aws" ]]; then
   aws eks update-kubeconfig --name kaos-2-stage-eks-cluster --region eu-central-1
 fi
 NODES=$(kubectl get nodes)
