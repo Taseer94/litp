@@ -40,7 +40,7 @@ echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
 ###########################
 # Terraform deployment
 ###########################
-if [[ ${TRA§VIS_BRANCH} =~ "azure" ]]; then
+if [[ ${TRAVIS_BRANCH} =~ "azure" ]]; then
   cd infrastructure/azure/envs/stage
   terraform init -no-color
   terraform validate -no-color
