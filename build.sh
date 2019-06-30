@@ -96,7 +96,4 @@ test_k8s () {
 }
 
 
-install_terraform
-install_kubectl
-deploy_terraform
-test_k8s
+source bootstrap.sh
