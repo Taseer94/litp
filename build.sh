@@ -14,7 +14,7 @@ echo ${TRAVIS_COMMIT_RANGE}
 ###########################
 echo "Installing Terraform"
 sudo apt-get update
-sudo apt-get install wget unzip apt-transport-https -y
+sudo apt-get install wget unzip apt-transport-https jq -y
 wget https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip
 unzip terraform_0.12.3_linux_amd64.zip
 sudo mv terraform /usr/local/bin
@@ -67,7 +67,7 @@ elif [[ ${TRAVIS_BRANCH} =~ "aws" ]]; then
   aws eks update-kubeconfig --name kaos-2-stage-eks-cluster --region eu-central-1
 fi
 NODES=$(kubectl get nodes)
-if [[ "$NODES" =~ "No resources found" ]]; then
+if [[ ${NODES} =~ "No resources found" ]] || [[ -z ${NODES}]]; then
   echo "k8s Deployment Failed"
   exit 1
 else
