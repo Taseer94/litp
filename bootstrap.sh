@@ -25,9 +25,7 @@ install_terraform () {
 # Kubectl Installation
 ###########################
 install_kubectl () {
-  echo "----------------------"
   echo "  Installing Kubectl  "
-  echo "----------------------"
   curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
   chmod +x ./kubectl
   sudo mv ./kubectl /usr/local/bin/kubectl
@@ -56,7 +54,7 @@ install_azcli () {
   echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
       sudo tee /etc/apt/sources.list.d/azure-cli.list
   sudo apt-get update
-  sudo apt-get install azure-cli
+  sudo apt-get install azure-cli -y
 }
 
 install_terraform
